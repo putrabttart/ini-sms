@@ -196,9 +196,9 @@ CRON_SECRET
 6. Terapkan variabel minimal pada Production. Tambahkan juga ke Preview hanya jika database preview memang disiapkan dan aman.
 7. Klik **Deploy**.
 8. Setelah deployment selesai, buka `https://DOMAIN-VERCEL/health` dan dashboard utama.
-9. Periksa **Settings > Cron Jobs**. `vercel.json` menjadwalkan `/api/cleanup` setiap satu jam.
+9. Periksa **Settings > Cron Jobs**. `vercel.json` menjadwalkan `/api/cleanup` sekali sehari pada pukul 00:00 UTC agar kompatibel dengan paket Vercel Hobby.
 
-Vercel mengirim `Authorization: Bearer <CRON_SECRET>` saat menjalankan cron. Endpoint menolak request tanpa secret valid. Frekuensi cron yang tersedia dapat bergantung pada paket Vercel. Data tetap tersembunyi setelah 15 menit melalui filter query walaupun cleanup fisik terlambat.
+Vercel mengirim `Authorization: Bearer <CRON_SECRET>` saat menjalankan cron. Endpoint menolak request tanpa secret valid. Paket Hobby membatasi cron menjadi sekali sehari. Data tetap tersembunyi setelah 15 menit melalui filter query, sehingga jadwal harian hanya memengaruhi waktu penghapusan fisik dari database dan tidak memperpanjang waktu tampil di dashboard.
 
 Jangan menganggap deployment sudah terhubung ke HP sebelum URL dan HMAC di Android dikonfigurasi serta diuji.
 
